@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BPA | Boston Permit Authority</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="header-row">
+            <span class="logo-icon">🏛️</span>
+               <h1 class="app-title">BPA <span class="internal-badge">INTERNAL</span> (DEMO)</h1>
+        </div>
+        <p class="app-subtitle">Internal Intake and Review Dashboard</p>
+    </header>
+
+    <main class="main-content">
+        <section class="dashboard" aria-label="Summary">
+            <article class="card">
+                <h2 id="receivedCount">0</h2>
+                <p>Received</p>
+            </article>
+            <article class="card">
+                <h2 id="inReviewCount">0</h2>
+                <p>In Review</p>
+            </article>
+            <article class="card">
+                <h2 id="approvedCount">0</h2>
+                <p>Approved</p>
+            </article>
+        </section>
+
+        <section class="form-section">
+            <div class="form-header">
+                <h3>Manual Internal Intake</h3>
+                <p class="form-helper">Use this section to record phone, counter, or walk-in permit requests. Public portal submissions are recorded automatically and appear in the queue below.</p>
+            </div>
+            <form id="permitForm" autocomplete="off" novalidate>
+                <div class="form-group">
+                    <label for="source">Source</label>
+                    <select id="source" required>
+                        <option value="">Select source</option>
+                        <option value="Phone Intake">Phone Intake</option>
+                        <option value="Walk-In">Walk-In</option>
+                        <option value="Internal Entry">Internal Entry</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="submitBy">Submitted By</label>
+                    <input id="submitBy" type="text" placeholder="Name" required>
+                </div>
+                <div class="form-group">
+                    <label for="permitName">Permit Name</label>
+                    <input id="permitName" type="text" placeholder="Main Street Remodel" required>
+                </div>
+                <div class="form-group">
+                    <label for="permitType">Permit Type</label>
+                    <select id="permitType" required>
+                        <option value="">Select type</option>
+                        <option value="Building">Building</option>
+                        <option value="Electrical">Electrical</option>
+                        <option value="Plumbing">Plumbing</option>
+                        <option value="Event">Event</option>
+                        <option value="Food Truck">Food Truck</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="priority">Priority</label>
+                    <select id="priority" required>
+                        <option value="">Select priority</option>
+                        <option value="Low">Low</option>
+                        <option value="Medium">Medium</option>
+                        <option value="High">High</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="dueDate">Due Date</label>
+                    <input id="dueDate" type="date" required>
+                </div>
+                <div class="form-group">
+                    <label for="assignedReviewer">Assign To</label>
+                    <select id="assignedReviewer">
+                        <option value="">Unassigned</option>
+                        <option value="Aimee Sprung">Aimee Sprung</option>
+                        <option value="Brandon Brin">Brandon Brin</option>
+                        <option value="Paul McCabe">Paul McCabe</option>
+                    </select>
+                </div>
+                <div class="form-group notes-group">
+                    <label for="internalNotes">Internal Notes (Optional)</label>
+                    <textarea id="internalNotes" rows="2" placeholder="Staff notes, routing info, special handling"></textarea>
+                </div>
+                <div class="form-group action-group">
+                    <button class="btn" type="submit">Add Permit to Queue</button>
+                </div>
+            </form>
+        </section>
+
+        <section class="table-section">
+            <table id="permitTable">
+                <thead>
+                    <tr>
+                        <th>Permit Name</th>
+                        <th>Type</th>
+                        <th>Priority</th>
+                        <th>Status</th>
+                        <th>Source</th>
+                        <th>Submitted By</th>
+                        <th>Submitted On</th>
+                        <th>Assigned Reviewer</th>
+                        <th>Last Updated</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </section>
+    </main>
+
+    <div class="notification" aria-live="polite"></div>
+
+    <!-- Reviewer Assignment Modal -->
+    <div id="reviewerModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Assign Reviewer</h2>
+                <button class="modal-close" id="modalCloseBtn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p class="modal-permit-name" id="modalPermitName"></p>
+                <label for="modalReviewerSelect">Select Reviewer:</label>
+                <select id="modalReviewerSelect">
+                    <option value="">Unassigned</option>
+                    <option value="Aimee Sprung">Aimee Sprung</option>
+                    <option value="Brandon Brin">Brandon Brin</option>
+                    <option value="Paul McCabe">Paul McCabe</option>
+                </select>
+            </div>
+            <div class="modal-footer">
+                <button id="modalCancelBtn" class="btn-secondary">Cancel</button>
+                <button id="modalSaveBtn" class="btn">Save Reviewer</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
