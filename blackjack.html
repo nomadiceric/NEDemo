@@ -368,12 +368,6 @@
             }
 
             newGame() {
-                if (this.playerHand.length > 0) {
-                    const playerScore = this.calculateScore(this.playerHand);
-                    const dealerScore = this.calculateScore(this.dealerHand);
-                    this.determineWinner(playerScore, dealerScore);
-                }
-
                 this.playerHand = [];
                 this.dealerHand = [];
                 this.gameOver = false;
